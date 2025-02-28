@@ -9,9 +9,15 @@ import Secciones.Menu.*;
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.text.DecimalFormat;
+import java.util.Vector;
 
 public class Pedido extends javax.swing.JPanel {
+
+    private String selectedName;
+    private Double selectedPrice;
 
     public Pedido() {
         initComponents();
@@ -934,7 +940,27 @@ public class Pedido extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
+        int tqty = (int) jSpinner1.getValue();
+
+        if (tqty <= 0) {
+            JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor a 0", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Double Tot_Price = selectedPrice * tqty;
+        DecimalFormat df = new DecimalFormat("0.00");
+        String d11 = df.format(Tot_Price);
+
+        DefaultTableModel dt = (DefaultTableModel) jTable3.getModel();
+        Vector<String> v = new Vector<>();
+        v.add(selectedName);
+        v.add(String.valueOf(tqty));
+        v.add("Unidad");
+        v.add(d11);
+        dt.addRow(v);
+
+        cart_cal();
+        PanelCubierta.setVisible(false);
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -978,6 +1004,9 @@ public class Pedido extends javax.swing.JPanel {
         PanelCubierta.removeAll();
         PanelCubierta.repaint();
         PanelCubierta.revalidate();
+
+        addTable("Carne_1", 40.000);
+
         PanelCubierta.add(Cubierta1);
         PanelCubierta.repaint();
         PanelCubierta.revalidate();
@@ -985,6 +1014,18 @@ public class Pedido extends javax.swing.JPanel {
 
     public void desabilitarformulario(){
         PanelCubierta.setVisible(false);
+    }
+
+    public void addTable(String Name, Double Price) {  
+        selectedName = Name;
+        selectedPrice = Price;
+
+        Cubierta1.setBackground(new Color(230, 230, 230, 240));
+        PanelCubierta.setVisible(true);
+        PanelCubierta.removeAll();
+        PanelCubierta.add(Cubierta1);
+        PanelCubierta.revalidate();
+        PanelCubierta.repaint();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
