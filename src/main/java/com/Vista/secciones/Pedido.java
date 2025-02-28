@@ -983,14 +983,7 @@ public class Pedido extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
-        Cubierta1.setBackground(new Color(230, 230, 230, 240));
-        PanelCubierta.setVisible(true);
-        PanelCubierta.removeAll();
-        PanelCubierta.repaint();
-        PanelCubierta.revalidate();
-        PanelCubierta.add(Cubierta1);
-        PanelCubierta.repaint();
-        PanelCubierta.revalidate();
+        
     }//GEN-LAST:event_jPanel8MouseClicked
 
     private void Cubierta3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Cubierta3MouseClicked
