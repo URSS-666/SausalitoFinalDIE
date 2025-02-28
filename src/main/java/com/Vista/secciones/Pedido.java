@@ -1028,6 +1028,41 @@ public class Pedido extends javax.swing.JPanel {
         PanelCubierta.repaint();
     }
 
+    private void jPanel10MouseClicked(java.awt.event.MouseEvent evt) {
+        int tqty = (int) jSpinner1.getValue();
+
+        if (tqty <= 0) {
+            JOptionPane.showMessageDialog(null, "La cantidad debe be greater than 0", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Double Tot_Price = selectedPrice * tqty;
+        DecimalFormat df = new DecimalFormat("0.00");
+        String d11 = df.format(Tot_Price);
+
+        DefaultTableModel dt = (DefaultTableModel) jTable3.getModel();
+        Vector<String> v = new Vector<>();
+        v.add(selectedName);
+        v.add(String.valueOf(tqty));
+        v.add("Unidad");
+        v.add(d11);
+        dt.addRow(v);
+
+        cart_cal();
+    }
+
+    private void cart_cal() {
+        DefaultTableModel dt = (DefaultTableModel) jTable3.getModel();
+        int n = dt.getRowCount();
+        Double total = 0.0;
+        for (int i = 0; i < n; i++) {
+            total += Double.parseDouble((String) dt.getValueAt(i, 3));
+        }
+        DecimalFormat df = new DecimalFormat("0.00");
+        String d11 = df.format(total);
+        jTextField6.setText(d11);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonAdicionales;
     private javax.swing.JButton BotonBebidas;
